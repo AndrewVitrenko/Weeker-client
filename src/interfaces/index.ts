@@ -9,13 +9,37 @@ export interface ITask {
   backgroundColor?: string;
 }
 
-export interface IStore {
-  token: string;
+export interface IWeekerStore {
   tasks: ITask[];
-  error: string | null;
   focusedTime: string | null;
   currentWeek: {
     start: string;
     end: string;
   };
 }
+
+export interface IAuthStore {
+  token: string;
+}
+
+export type ColorType =
+  | 'inherit'
+  | 'primary'
+  | 'secondary'
+  | 'success'
+  | 'error'
+  | 'info'
+  | 'warning';
+
+export type IconsType =
+  | 'delete'
+  | 'save'
+  | 'cancel'
+  | 'clear'
+  | 'send'
+  | 'show'
+  | 'hide';
+
+export type ComponentIcons = {
+  [key in IconsType]: React.ReactNode;
+};
