@@ -7,7 +7,7 @@ import { COMPONENT_ICONS } from '../../../../constants';
 
 export const FormField: FC<IFormFieldProps> = ({
   label,
-  name = '',
+  name,
   placeholder,
   variant = 'outlined',
   disabled = false,
