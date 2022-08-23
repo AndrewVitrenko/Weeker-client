@@ -25,7 +25,7 @@ export const LoginForm: FC = () => {
         navigate(ROUTES.HOME, { replace: true });
       } catch (e) {}
     },
-    [dispatch, login],
+    [dispatch, login, navigate],
   );
 
   return (
