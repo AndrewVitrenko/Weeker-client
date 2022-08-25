@@ -1,9 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { IStore } from '../interfaces';
+import { IWeekerStore } from '../../interfaces';
 
-const initialState: IStore = {
-  token: '',
-  error: null,
+const initialState: IWeekerStore = {
   focusedTime: null,
   tasks: [],
   currentWeek: {
@@ -13,9 +11,9 @@ const initialState: IStore = {
 };
 
 const weekerSlice = createSlice({
-  name: 'weekerSlice',
+  name: 'weeker',
   initialState,
   reducers: {},
 });
 
-export default weekerSlice.reducer;
+export const weekerReducer = weekerSlice.reducer;
