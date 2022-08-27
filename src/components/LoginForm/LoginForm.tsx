@@ -1,7 +1,7 @@
 import React, { FC, useCallback } from 'react';
 import { Formik } from 'formik';
 import FormField from '../common/components/FormField';
-import * as Styled from './LoginForm.styled';
+import { FormButtons, FormContainer } from '../common/styles';
 import { initialValues } from './constants';
 import { ILoginForm } from './LoginForm.types';
 import DefaultButton from '../common/components/DefaultButton';
@@ -37,7 +37,7 @@ export const LoginForm: FC = () => {
       onSubmit={onSubmit}
     >
       {({ handleSubmit }) => (
-        <Styled.FormContainer onSubmit={handleSubmit}>
+        <FormContainer onSubmit={handleSubmit}>
           <FormField required name="email" label="Email" type="email" />
           <FormField
             required
@@ -45,10 +45,10 @@ export const LoginForm: FC = () => {
             label="Password"
             type="password"
           />
-          <Styled.ButtonWrapper>
+          <FormButtons>
             <DefaultButton type="submit" text="login" endIcon="send" />
-          </Styled.ButtonWrapper>
-        </Styled.FormContainer>
+          </FormButtons>
+        </FormContainer>
       )}
     </Formik>
   );
