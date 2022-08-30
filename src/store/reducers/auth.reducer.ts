@@ -3,9 +3,7 @@ import { LOCAL_STORAGE_KEYS } from '../../constants';
 import { IAuthStore } from '../../interfaces';
 
 const initialState: IAuthStore = {
-  token: JSON.parse(
-    localStorage.getItem(LOCAL_STORAGE_KEYS.TOKEN) ?? ' { "token": "" } ',
-  ).token,
+  token: JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEYS.TOKEN) ?? ' "" '),
 };
 
 const authSlice = createSlice({
@@ -14,10 +12,7 @@ const authSlice = createSlice({
   reducers: {
     setToken: (state, { payload }: PayloadAction<string>) => {
       state.token = payload;
-      localStorage.setItem(
-        LOCAL_STORAGE_KEYS.TOKEN,
-        JSON.stringify({ token: payload }),
-      );
+      localStorage.setItem(LOCAL_STORAGE_KEYS.TOKEN, JSON.stringify(payload));
     },
   },
 });
