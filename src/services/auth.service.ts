@@ -1,9 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { ILoginForm } from '../components/LoginForm/LoginForm.types';
+import { ISignupForm } from '../components/SignupForm/SignupForm.types';
 
-interface LoginResponse {
+interface IAuthResponse {
   token: string;
 }
+
+type SignupRequest = Omit<ISignupForm, 'confirmPassword'>;
 
 export const authApi = createApi({
   reducerPath: 'auth/api',
@@ -11,9 +14,16 @@ export const authApi = createApi({
     baseUrl: process.env.REACT_APP_API_URL,
   }),
   endpoints: builder => ({
-    login: builder.mutation<LoginResponse, ILoginForm>({
+    login: builder.mutation<IAuthResponse, ILoginForm>({
       query: credentials => ({
         url: 'login',
+        method: 'POST',
+        body: credentials,
+      }),
+    }),
+    sigunp: builder.mutation<IAuthResponse, SignupRequest>({
+      query: credentials => ({
+        url: 'signup',
         method: 'POST',
         body: credentials,
       }),
@@ -21,4 +31,4 @@ export const authApi = createApi({
   }),
 });
 
-export const { useLoginMutation } = authApi;
+export const { useLoginMutation, useSigunpMutation } = authApi;
