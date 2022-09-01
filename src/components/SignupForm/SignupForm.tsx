@@ -15,7 +15,7 @@ import { ROUTES } from '../../constants';
 
 export const SignupForm: FC = () => {
   const dispatch = useDispatch();
-  const [signup] = useSigunpMutation();
+  const [signup, { isLoading }] = useSigunpMutation();
   const navigate = useNavigate();
 
   const onSubmit = useCallback(
@@ -65,7 +65,13 @@ export const SignupForm: FC = () => {
           />
 
           <FormButtons>
-            <DefaultButton type="submit" text="signup" endIcon="send" />
+            <DefaultButton
+              type="submit"
+              text="signup"
+              endIcon="send"
+              loading={isLoading}
+              disabled={isLoading}
+            />
           </FormButtons>
         </FormContainer>
       )}

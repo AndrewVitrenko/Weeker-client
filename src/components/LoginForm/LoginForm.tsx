@@ -14,7 +14,7 @@ import { ROUTES } from '../../constants';
 
 export const LoginForm: FC = () => {
   const dispatch = useDispatch();
-  const [login] = useLoginMutation();
+  const [login, { isLoading }] = useLoginMutation();
   const navigate = useNavigate();
 
   const onSubmit = useCallback(
@@ -46,7 +46,13 @@ export const LoginForm: FC = () => {
             type="password"
           />
           <FormButtons>
-            <DefaultButton type="submit" text="login" endIcon="send" />
+            <DefaultButton
+              type="submit"
+              text="login"
+              endIcon="send"
+              loading={isLoading}
+              disabled={isLoading}
+            />
           </FormButtons>
         </FormContainer>
       )}
