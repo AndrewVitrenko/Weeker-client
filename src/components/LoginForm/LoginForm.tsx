@@ -1,5 +1,6 @@
 import React, { FC, useCallback } from 'react';
 import { Formik } from 'formik';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query/react';
 import FormField from '../common/components/FormField';
 import { FormButtons, FormContainer } from '../common/styles';
 import { initialValues } from './constants';
@@ -8,9 +9,10 @@ import DefaultButton from '../common/components/DefaultButton';
 import { validationSchema } from './utils';
 import { useDispatch } from 'react-redux';
 import { useLoginMutation } from '../../services';
-import { setToken } from '../../store/reducers';
+import { setToken, showToast } from '../../store/reducers';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../constants';
+import { extractRequestError } from 'src/helpers';
 
 export const LoginForm: FC = () => {
   const dispatch = useDispatch();
@@ -23,7 +25,10 @@ export const LoginForm: FC = () => {
         const { token } = await login(values).unwrap();
         dispatch(setToken(token));
         navigate(ROUTES.HOME, { replace: true });
-      } catch (e) {}
+      } catch (e) {
+        const toastData = extractRequestError(e as FetchBaseQueryError);
+        dispatch(showToast(toastData));
+      }
     },
     [dispatch, login, navigate],
   );

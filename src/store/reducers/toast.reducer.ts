@@ -1,11 +1,7 @@
-import { AlertColor } from '@mui/material';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IToastStore } from '../../interfaces';
 
-interface IShowToastPayload {
-  message: string;
-  status: AlertColor;
-}
+type IShowToastPayload = Omit<IToastStore, 'open'>;
 
 const initialState: IToastStore = {
   open: false,

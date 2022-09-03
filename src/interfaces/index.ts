@@ -51,3 +51,7 @@ export interface IToastStore {
   message: string;
   open: boolean;
 }
+
+export interface IErrorData {
+  message: string;
+}

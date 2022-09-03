@@ -1,5 +1,6 @@
 import React, { FC, useCallback } from 'react';
 import { Formik } from 'formik';
+import { FetchBaseQueryError } from '@reduxjs/toolkit/query/react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import FormField from '../common/components/FormField';
@@ -10,8 +11,9 @@ import * as Styled from './SignupForm.styled';
 import { initialValues } from './constants';
 import { validationSchema } from './utils';
 import { useSigunpMutation } from '../../services';
-import { setToken } from '../../store/reducers';
+import { setToken, showToast } from '../../store/reducers';
 import { ROUTES } from '../../constants';
+import { extractRequestError } from 'src/helpers';
 
 export const SignupForm: FC = () => {
   const dispatch = useDispatch();
@@ -30,7 +32,10 @@ export const SignupForm: FC = () => {
         }).unwrap();
         dispatch(setToken(token));
         navigate(ROUTES.HOME, { replace: true });
-      } catch (e) {}
+      } catch (e) {
+        const toastData = extractRequestError(e as FetchBaseQueryError);
+        dispatch(showToast(toastData));
+      }
     },
     [signup, dispatch, navigate],
   );

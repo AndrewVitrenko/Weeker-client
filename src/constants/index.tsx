@@ -29,3 +29,7 @@ export enum ROUTES {
   LOGIN = '/login',
   SIGNUP = '/signup',
 }
+
+export enum REQUEST_ERRORS {
+  NETWORK_ERROR = 'Network error, please check your internet',
+}
