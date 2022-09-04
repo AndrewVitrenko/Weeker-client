@@ -10,7 +10,7 @@ import * as Styled from './SignupForm.styled';
 import { initialValues } from './constants';
 import { validationSchema } from './utils';
 import { useSigunpMutation } from '../../services';
-import { setToken, showToast } from '../../store/reducers';
+import { showToast } from '../../store/reducers';
 import { ROUTES } from '../../constants';
 import { extractRequestError } from 'src/helpers';
 
@@ -22,14 +22,13 @@ export const SignupForm: FC = () => {
   const onSubmit = useCallback(
     async ({ email, name, password, surname, phone }: ISignupForm) => {
       try {
-        const { token } = await signup({
+        await signup({
           email,
           name,
           surname,
           password,
           phone,
         }).unwrap();
-        dispatch(setToken(token));
         navigate(ROUTES.HOME, { replace: true });
       } catch (e) {
         const toastData = extractRequestError(e);
