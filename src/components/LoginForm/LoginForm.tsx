@@ -1,6 +1,5 @@
 import React, { FC, useCallback } from 'react';
 import { Formik } from 'formik';
-import { FetchBaseQueryError } from '@reduxjs/toolkit/query/react';
 import FormField from '../common/components/FormField';
 import { FormButtons, FormContainer } from '../common/styles';
 import { initialValues } from './constants';
@@ -26,7 +25,7 @@ export const LoginForm: FC = () => {
         dispatch(setToken(token));
         navigate(ROUTES.HOME, { replace: true });
       } catch (e) {
-        const toastData = extractRequestError(e as FetchBaseQueryError);
+        const toastData = extractRequestError(e);
         dispatch(showToast(toastData));
       }
     },

@@ -3,9 +3,9 @@ import { REQUEST_ERRORS } from 'src/constants';
 import { IErrorData, IToastStore } from 'src/interfaces';
 
 export const extractRequestError = (
-  error: FetchBaseQueryError,
+  error: unknown,
 ): Omit<IToastStore, 'open'> => {
-  const { status, data } = error;
+  const { status, data } = error as FetchBaseQueryError;
 
   if (status === 'FETCH_ERROR') {
     return {
