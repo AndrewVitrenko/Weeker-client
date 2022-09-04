@@ -8,7 +8,7 @@ import DefaultButton from '../common/components/DefaultButton';
 import { validationSchema } from './utils';
 import { useDispatch } from 'react-redux';
 import { useLoginMutation } from '../../services';
-import { setToken, showToast } from '../../store/reducers';
+import { showToast } from '../../store/reducers';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../constants';
 import { extractRequestError } from 'src/helpers';
@@ -21,8 +21,7 @@ export const LoginForm: FC = () => {
   const onSubmit = useCallback(
     async (values: ILoginForm) => {
       try {
-        const { token } = await login(values).unwrap();
-        dispatch(setToken(token));
+        await login(values).unwrap();
         navigate(ROUTES.HOME, { replace: true });
       } catch (e) {
         const toastData = extractRequestError(e);
