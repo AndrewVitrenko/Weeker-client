@@ -10,7 +10,12 @@ const initialState: IAuthStore = {
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {},
+  reducers: {
+    logout: state => {
+      state.token = '';
+      localStorage.removeItem(LOCAL_STORAGE_KEYS.TOKEN);
+    },
+  },
   extraReducers: builder => {
     builder.addMatcher(
       authApi.endpoints.login.matchFulfilled,
@@ -36,4 +41,5 @@ const authSlice = createSlice({
   },
 });
 
+export const { logout } = authSlice.actions;
 export const authReducer = authSlice.reducer;
