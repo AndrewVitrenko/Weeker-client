@@ -8,13 +8,14 @@ import DefaultButton from '../common/components/DefaultButton';
 import { validationSchema } from './utils';
 import { useDispatch } from 'react-redux';
 import { useLoginMutation } from '../../services';
-import { setToken } from '../../store/reducers';
+import { setToken, showToast } from '../../store/reducers';
 import { useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../constants';
+import { extractRequestError } from 'src/helpers';
 
 export const LoginForm: FC = () => {
   const dispatch = useDispatch();
-  const [login] = useLoginMutation();
+  const [login, { isLoading }] = useLoginMutation();
   const navigate = useNavigate();
 
   const onSubmit = useCallback(
@@ -23,7 +24,10 @@ export const LoginForm: FC = () => {
         const { token } = await login(values).unwrap();
         dispatch(setToken(token));
         navigate(ROUTES.HOME, { replace: true });
-      } catch (e) {}
+      } catch (e) {
+        const toastData = extractRequestError(e);
+        dispatch(showToast(toastData));
+      }
     },
     [dispatch, login, navigate],
   );
@@ -46,7 +50,13 @@ export const LoginForm: FC = () => {
             type="password"
           />
           <FormButtons>
-            <DefaultButton type="submit" text="login" endIcon="send" />
+            <DefaultButton
+              type="submit"
+              text="login"
+              endIcon="send"
+              loading={isLoading}
+              disabled={isLoading}
+            />
           </FormButtons>
         </FormContainer>
       )}

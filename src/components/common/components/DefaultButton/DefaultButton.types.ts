@@ -10,4 +10,5 @@ export interface IDefaultButtonProps {
   startIcon?: IconsType;
   text?: string;
   type?: 'button' | 'submit' | 'reset';
+  loading?: boolean;
 }

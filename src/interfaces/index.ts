@@ -1,3 +1,5 @@
+import { AlertColor } from '@mui/material';
+
 export interface ITask {
   id: string;
   text: string;
@@ -43,3 +45,13 @@ export type IconsType =
 export type ComponentIcons = {
   [key in IconsType]: React.ReactNode;
 };
+
+export interface IToastStore {
+  status: AlertColor;
+  message: string;
+  open: boolean;
+}
+
+export interface IErrorData {
+  message: string;
+}

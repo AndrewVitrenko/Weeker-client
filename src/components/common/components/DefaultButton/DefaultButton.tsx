@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
 import { Button } from '@mui/material';
 import { IDefaultButtonProps } from './DefaultButton.types';
-import { COMPONENT_ICONS } from '../../../../constants';
+import * as Styled from './DefaultButton.styled';
+import { COMPONENT_ICONS } from 'src/constants';
 
 export const DefaultButton: FC<IDefaultButtonProps> = ({
   variant = 'contained',
@@ -13,19 +14,23 @@ export const DefaultButton: FC<IDefaultButtonProps> = ({
   color = 'primary',
   disabled = false,
   type,
+  loading = false,
 }) => {
   return (
-    <Button
-      variant={variant}
-      size={size}
-      onClick={onClick}
-      disabled={disabled}
-      color={color}
-      startIcon={startIcon && COMPONENT_ICONS[startIcon]}
-      endIcon={endIcon && COMPONENT_ICONS[endIcon]}
-      type={type}
-    >
-      {text}
-    </Button>
+    <Styled.Container>
+      <Button
+        variant={variant}
+        size={size}
+        onClick={onClick}
+        disabled={disabled}
+        color={color}
+        startIcon={startIcon && COMPONENT_ICONS[startIcon]}
+        endIcon={endIcon && COMPONENT_ICONS[endIcon]}
+        type={type}
+      >
+        {text}
+      </Button>
+      {loading && <Styled.Loader size={24} />}
+    </Styled.Container>
   );
 };

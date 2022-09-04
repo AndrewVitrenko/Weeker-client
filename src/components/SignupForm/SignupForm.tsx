@@ -10,12 +10,13 @@ import * as Styled from './SignupForm.styled';
 import { initialValues } from './constants';
 import { validationSchema } from './utils';
 import { useSigunpMutation } from '../../services';
-import { setToken } from '../../store/reducers';
+import { setToken, showToast } from '../../store/reducers';
 import { ROUTES } from '../../constants';
+import { extractRequestError } from 'src/helpers';
 
 export const SignupForm: FC = () => {
   const dispatch = useDispatch();
-  const [signup] = useSigunpMutation();
+  const [signup, { isLoading }] = useSigunpMutation();
   const navigate = useNavigate();
 
   const onSubmit = useCallback(
@@ -30,7 +31,10 @@ export const SignupForm: FC = () => {
         }).unwrap();
         dispatch(setToken(token));
         navigate(ROUTES.HOME, { replace: true });
-      } catch (e) {}
+      } catch (e) {
+        const toastData = extractRequestError(e);
+        dispatch(showToast(toastData));
+      }
     },
     [signup, dispatch, navigate],
   );
@@ -65,7 +69,13 @@ export const SignupForm: FC = () => {
           />
 
           <FormButtons>
-            <DefaultButton type="submit" text="signup" endIcon="send" />
+            <DefaultButton
+              type="submit"
+              text="signup"
+              endIcon="send"
+              loading={isLoading}
+              disabled={isLoading}
+            />
           </FormButtons>
         </FormContainer>
       )}
