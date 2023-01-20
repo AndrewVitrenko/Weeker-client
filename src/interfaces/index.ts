@@ -21,7 +21,7 @@ export interface IWeekerStore {
 }
 
 export interface IAuthStore {
-  token: string;
+  access_token: string;
 }
 
 export type ColorType =

@@ -9,14 +9,14 @@ import { ISignupForm } from './SignupForm.types';
 import * as Styled from './SignupForm.styled';
 import { initialValues } from './constants';
 import { validationSchema } from './utils';
-import { useSigunpMutation } from '../../services';
+import { useRegisterMutation } from '../../services';
 import { showToast } from '../../store/reducers';
 import { ROUTES } from '../../constants';
 import { extractRequestError } from 'src/helpers';
 
 export const SignupForm: FC = () => {
   const dispatch = useDispatch();
-  const [signup, { isLoading }] = useSigunpMutation();
+  const [signup, { isLoading }] = useRegisterMutation();
   const navigate = useNavigate();
 
   const onSubmit = useCallback(

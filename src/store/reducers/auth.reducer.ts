@@ -1,10 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { LOCAL_STORAGE_KEYS } from '../../constants';
-import { IAuthStore } from '../../interfaces';
+import { LOCAL_STORAGE_KEYS } from 'src/constants';
+import { IAuthStore } from 'src/interfaces';
 import { authApi } from 'src/services';
 
 const initialState: IAuthStore = {
-  token: JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEYS.TOKEN) ?? ' "" '),
+  access_token: JSON.parse(
+    localStorage.getItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN) ?? ' "" ',
+  ),
 };
 
 const authSlice = createSlice({
@@ -12,29 +14,29 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     logout: state => {
-      state.token = '';
-      localStorage.removeItem(LOCAL_STORAGE_KEYS.TOKEN);
+      state.access_token = '';
+      localStorage.removeItem(LOCAL_STORAGE_KEYS.ACCESS_TOKEN);
     },
   },
   extraReducers: builder => {
     builder.addMatcher(
       authApi.endpoints.login.matchFulfilled,
       (state, { payload }) => {
-        state.token = payload.token;
+        state.access_token = payload.access_token;
         localStorage.setItem(
-          LOCAL_STORAGE_KEYS.TOKEN,
-          JSON.stringify(payload.token),
+          LOCAL_STORAGE_KEYS.ACCESS_TOKEN,
+          JSON.stringify(payload.access_token),
         );
       },
     );
 
     builder.addMatcher(
-      authApi.endpoints.sigunp.matchFulfilled,
+      authApi.endpoints.register.matchFulfilled,
       (state, { payload }) => {
-        state.token = payload.token;
+        state.access_token = payload.access_token;
         localStorage.setItem(
-          LOCAL_STORAGE_KEYS.TOKEN,
-          JSON.stringify(payload.token),
+          LOCAL_STORAGE_KEYS.ACCESS_TOKEN,
+          JSON.stringify(payload.access_token),
         );
       },
     );
