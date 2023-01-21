@@ -9,14 +9,15 @@ import { ISignupForm } from './SignupForm.types';
 import * as Styled from './SignupForm.styled';
 import { initialValues } from './constants';
 import { validationSchema } from './utils';
-import { useRegisterMutation } from 'src/services';
+import { useRegisterMutation, useLoginMutation } from 'src/services';
 import { showToast } from 'src/store/reducers';
 import { ROUTES } from 'src/constants';
 import { extractRequestError } from 'src/helpers';
 
 export const SignupForm: FC = () => {
   const dispatch = useDispatch();
-  const [signup, { isLoading }] = useRegisterMutation();
+  const [signup, { isLoading: isRegisterLoading }] = useRegisterMutation();
+  const [login, { isLoading: isLoginLoading }] = useLoginMutation();
   const navigate = useNavigate();
 
   const onSubmit = useCallback(
@@ -29,13 +30,14 @@ export const SignupForm: FC = () => {
           password,
           phone: phone || null,
         }).unwrap();
-        navigate(ROUTES.LOGIN, { replace: true });
+        await login({ email, password }).unwrap();
+        navigate(ROUTES.HOME, { replace: true });
       } catch (e) {
         const toastData = extractRequestError(e);
         dispatch(showToast(toastData));
       }
     },
-    [signup, dispatch, navigate],
+    [signup, dispatch, navigate, login],
   );
 
   return (
@@ -72,8 +74,8 @@ export const SignupForm: FC = () => {
               type="submit"
               text="signup"
               endIcon="send"
-              loading={isLoading}
-              disabled={isLoading}
+              loading={isLoginLoading || isRegisterLoading}
+              disabled={isLoginLoading || isRegisterLoading}
             />
           </FormButtons>
         </FormContainer>

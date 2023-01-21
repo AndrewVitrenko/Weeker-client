@@ -29,17 +29,6 @@ const authSlice = createSlice({
         );
       },
     );
-
-    builder.addMatcher(
-      authApi.endpoints.register.matchFulfilled,
-      (state, { payload }) => {
-        state.access_token = payload.access_token;
-        localStorage.setItem(
-          LOCAL_STORAGE_KEYS.ACCESS_TOKEN,
-          JSON.stringify(payload.access_token),
-        );
-      },
-    );
   },
 });
 
