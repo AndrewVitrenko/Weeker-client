@@ -1,6 +1,6 @@
-import styled from 'styled-components';
-import { Box, Typography } from '@mui/material';
 import { Link } from 'react-router-dom';
+import { Box, Typography } from '@mui/material';
+import styled from 'styled-components';
 
 export const Container = styled(Box)`
   flex-grow: 1;

@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { IWeekerStore } from '../../interfaces';
+import { IWeekerStore } from 'src/interfaces';
 
 const initialState: IWeekerStore = {
   focusedTime: null,

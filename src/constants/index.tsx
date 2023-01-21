@@ -1,14 +1,14 @@
 import React from 'react';
 import {
-  Delete,
-  Save,
   Cancel,
-  Send,
+  Delete,
   RestartAlt,
+  Save,
+  Send,
   Visibility,
   VisibilityOff,
 } from '@mui/icons-material';
-import { ComponentIcons } from '../interfaces';
+import { ComponentIcons } from 'src/interfaces';
 
 export const COMPONENT_ICONS: ComponentIcons = {
   delete: <Delete />,

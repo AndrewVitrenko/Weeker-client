@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
+import LoginForm from 'src/components/LoginForm';
+
 import * as Styled from './Login.styled';
-import LoginForm from '../../components/LoginForm';
 
 export const Login: FC = () => {
   return (

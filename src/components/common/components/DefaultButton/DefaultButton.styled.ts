@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { Box, CircularProgress } from '@mui/material';
+import styled from 'styled-components';
 
 export const Container = styled(Box)`
   position: relative;

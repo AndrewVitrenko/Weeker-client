@@ -1,11 +1,12 @@
 import React, { FC } from 'react';
-import { Button } from '@mui/material';
-import LogoutIcon from '@mui/icons-material/Logout';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { useDispatch } from 'react-redux';
-import * as Styled from '../../Header.styled';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import LogoutIcon from '@mui/icons-material/Logout';
+import { Button } from '@mui/material';
 import { ROUTES } from 'src/constants';
 import { logout } from 'src/store/reducers';
+
+import * as Styled from '../../Header.styled';
 
 export const DesktopMenu: FC = () => {
   const dispatch = useDispatch();

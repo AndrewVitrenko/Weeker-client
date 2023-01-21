@@ -1,18 +1,20 @@
 import React, { FC, useCallback } from 'react';
-import { Formik } from 'formik';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import FormField from '../common/components/FormField';
-import DefaultButton from '../common/components/DefaultButton';
-import { FormContainer, FormButtons } from '../common/styles';
-import { ISignupForm } from './SignupForm.types';
-import * as Styled from './SignupForm.styled';
-import { initialValues } from './constants';
-import { validationSchema } from './utils';
-import { useRegisterMutation, useLoginMutation } from 'src/services';
-import { showToast } from 'src/store/reducers';
+import { Formik } from 'formik';
 import { ROUTES } from 'src/constants';
 import { extractRequestError } from 'src/helpers';
+import { useLoginMutation, useRegisterMutation } from 'src/services';
+import { showToast } from 'src/store/reducers';
+
+import DefaultButton from '../common/components/DefaultButton';
+import FormField from '../common/components/FormField';
+import { FormButtons, FormContainer } from '../common/styles';
+
+import { initialValues } from './constants';
+import * as Styled from './SignupForm.styled';
+import { ISignupForm } from './SignupForm.types';
+import { validationSchema } from './utils';
 
 export const SignupForm: FC = () => {
   const dispatch = useDispatch();

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IToastStore } from '../../interfaces';
+import { IToastStore } from 'src/interfaces';
 
 type IShowToastPayload = Omit<IToastStore, 'open'>;
 

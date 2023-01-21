@@ -1,20 +1,21 @@
 import React, { FC, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import LogoutIcon from '@mui/icons-material/Logout';
+import MenuIcon from '@mui/icons-material/Menu';
 import {
   Box,
+  Button,
+  IconButton,
   List,
   ListItem,
   SwipeableDrawer,
-  IconButton,
-  Button,
 } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
-import LogoutIcon from '@mui/icons-material/Logout';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import { useDispatch } from 'react-redux';
-import * as Styled from '../../Header.styled';
 import { ROUTES } from 'src/constants';
 import { logout } from 'src/store/reducers';
+
+import * as Styled from '../../Header.styled';
 
 const drawerWidth = 320;
 

@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { ILoginForm } from '../components/LoginForm/LoginForm.types';
-import { ISignupForm } from '../components/SignupForm/SignupForm.types';
+import { ILoginForm } from 'src/components/LoginForm/LoginForm.types';
+import { ISignupForm } from 'src/components/SignupForm/SignupForm.types';
 
 interface IAuthResponse {
   access_token: string;
