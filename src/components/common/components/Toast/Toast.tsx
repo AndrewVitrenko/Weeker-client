@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
-import { Snackbar, Alert } from '@mui/material';
 import { useDispatch } from 'react-redux';
+import { Alert, Snackbar } from '@mui/material';
 import { useAppSelector } from 'src/hooks';
 import { hideToast } from 'src/store/reducers';
+
 import { AUTO_CLOSE_TIMEOUT } from './constants';
 
 export const Toast: FC = () => {

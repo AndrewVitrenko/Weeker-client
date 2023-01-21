@@ -1,6 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { weekerReducer, authReducer, toastReducer } from './reducers';
+
 import { authApi } from '../services';
+
+import { authReducer, toastReducer, weekerReducer } from './reducers';
 
 export const store = configureStore({
   reducer: {

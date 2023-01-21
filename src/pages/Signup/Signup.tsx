@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
+import SignupForm from 'src/components/SignupForm';
+
 import * as Styled from './Signup.styled';
-import SignupForm from '../../components/SignupForm';
 
 export const Signup: FC = () => {
   return (

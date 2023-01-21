@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
 import { AppBar, Toolbar } from '@mui/material';
+import { ROUTES } from 'src/constants';
+
 import Menu from './components/Menu';
 import * as Styled from './Header.styled';
-import { ROUTES } from '../../constants';
 
 export const Header: FC = () => {
   return (

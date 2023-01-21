@@ -1,9 +1,10 @@
 import React, { FC } from 'react';
-import { useField } from 'formik';
 import { InputAdornment } from '@mui/material';
-import { IFormFieldProps } from './FormField.types';
+import { useField } from 'formik';
+import { COMPONENT_ICONS } from 'src/constants';
+
 import * as Styled from './FormField.styled';
-import { COMPONENT_ICONS } from '../../../../constants';
+import { IFormFieldProps } from './FormField.types';
 
 export const FormField: FC<IFormFieldProps> = ({
   startIcon,

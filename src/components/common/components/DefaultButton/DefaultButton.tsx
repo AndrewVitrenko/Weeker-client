@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
 import { Button } from '@mui/material';
-import { IDefaultButtonProps } from './DefaultButton.types';
-import * as Styled from './DefaultButton.styled';
 import { COMPONENT_ICONS } from 'src/constants';
+
+import * as Styled from './DefaultButton.styled';
+import { IDefaultButtonProps } from './DefaultButton.types';
 
 export const DefaultButton: FC<IDefaultButtonProps> = ({
   variant = 'contained',

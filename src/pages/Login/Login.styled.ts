@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { Card, Typography } from '@mui/material';
+import styled from 'styled-components';
 
 export const Container = styled(Card)`
   padding: 1rem;
