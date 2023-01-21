@@ -5,8 +5,8 @@ const phoneRegexp =
 
 export const validationSchema = yup.object().shape({
   email: yup.string().email().required('Email is required'),
-  name: yup.string().required('Name is required'),
-  surname: yup.string().required('Surname is  required'),
+  firstName: yup.string().required('Name is required'),
+  lastName: yup.string().required('Surname is  required'),
   password: yup
     .string()
     .required('Password is required')

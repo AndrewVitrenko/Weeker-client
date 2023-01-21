@@ -3,7 +3,7 @@ import { ILoginForm } from '../components/LoginForm/LoginForm.types';
 import { ISignupForm } from '../components/SignupForm/SignupForm.types';
 
 interface IAuthResponse {
-  token: string;
+  access_token: string;
 }
 
 type SignupRequest = Omit<ISignupForm, 'confirmPassword'>;
@@ -11,7 +11,7 @@ type SignupRequest = Omit<ISignupForm, 'confirmPassword'>;
 export const authApi = createApi({
   reducerPath: 'auth/api',
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.REACT_APP_API_URL,
+    baseUrl: `${process.env.REACT_APP_DEV_API_URL}/auth`,
   }),
   endpoints: builder => ({
     login: builder.mutation<IAuthResponse, ILoginForm>({
@@ -21,9 +21,9 @@ export const authApi = createApi({
         body: credentials,
       }),
     }),
-    sigunp: builder.mutation<IAuthResponse, SignupRequest>({
+    register: builder.mutation<IAuthResponse, SignupRequest>({
       query: credentials => ({
-        url: 'signup',
+        url: 'register',
         method: 'POST',
         body: credentials,
       }),
@@ -31,4 +31,4 @@ export const authApi = createApi({
   }),
 });
 
-export const { useLoginMutation, useSigunpMutation } = authApi;
+export const { useLoginMutation, useRegisterMutation } = authApi;

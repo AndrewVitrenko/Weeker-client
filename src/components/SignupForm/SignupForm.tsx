@@ -9,33 +9,35 @@ import { ISignupForm } from './SignupForm.types';
 import * as Styled from './SignupForm.styled';
 import { initialValues } from './constants';
 import { validationSchema } from './utils';
-import { useSigunpMutation } from '../../services';
-import { showToast } from '../../store/reducers';
-import { ROUTES } from '../../constants';
+import { useRegisterMutation, useLoginMutation } from 'src/services';
+import { showToast } from 'src/store/reducers';
+import { ROUTES } from 'src/constants';
 import { extractRequestError } from 'src/helpers';
 
 export const SignupForm: FC = () => {
   const dispatch = useDispatch();
-  const [signup, { isLoading }] = useSigunpMutation();
+  const [signup, { isLoading: isRegisterLoading }] = useRegisterMutation();
+  const [login, { isLoading: isLoginLoading }] = useLoginMutation();
   const navigate = useNavigate();
 
   const onSubmit = useCallback(
-    async ({ email, name, password, surname, phone }: ISignupForm) => {
+    async ({ email, firstName, password, lastName, phone }: ISignupForm) => {
       try {
         await signup({
           email,
-          name,
-          surname,
+          firstName,
+          lastName,
           password,
-          phone,
+          phone: phone || null,
         }).unwrap();
+        await login({ email, password }).unwrap();
         navigate(ROUTES.HOME, { replace: true });
       } catch (e) {
         const toastData = extractRequestError(e);
         dispatch(showToast(toastData));
       }
     },
-    [signup, dispatch, navigate],
+    [signup, dispatch, navigate, login],
   );
 
   return (
@@ -49,11 +51,10 @@ export const SignupForm: FC = () => {
       {({ handleSubmit }) => (
         <FormContainer onSubmit={handleSubmit}>
           <Styled.InputWrapper>
-            <FormField required name="name" label="Name" />
-            <FormField required name="surname" label="Surname" />
+            <FormField required name="firstName" label="First name" />
+            <FormField required name="lastName" label="Last name" />
           </Styled.InputWrapper>
           <FormField required name="email" type="email" label="Email" />
-          <FormField name="phone" label="Phone" />
           <FormField
             required
             name="password"
@@ -66,14 +67,15 @@ export const SignupForm: FC = () => {
             type="password"
             label="Confirm Password"
           />
+          <FormField name="phone" label="Phone" />
 
           <FormButtons>
             <DefaultButton
               type="submit"
               text="signup"
               endIcon="send"
-              loading={isLoading}
-              disabled={isLoading}
+              loading={isLoginLoading || isRegisterLoading}
+              disabled={isLoginLoading || isRegisterLoading}
             />
           </FormButtons>
         </FormContainer>

@@ -21,7 +21,7 @@ export const COMPONENT_ICONS: ComponentIcons = {
 };
 
 export enum LOCAL_STORAGE_KEYS {
-  TOKEN = 'WEEKER_TOKEN',
+  ACCESS_TOKEN = 'ACCESS_TOKEN',
 }
 
 export enum ROUTES {

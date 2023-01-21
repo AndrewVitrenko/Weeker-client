@@ -1,13 +1,8 @@
-import { IconsType } from '../../../../interfaces';
+import { TextFieldProps } from '@mui/material';
+import { IconsType } from 'src/interfaces';
 
-export interface IFormFieldProps {
-  label?: string;
-  placeholder?: string;
+export type IFormFieldProps = TextFieldProps & {
   name: string;
-  variant?: 'outlined' | 'filled';
-  required?: boolean;
-  type?: 'email' | 'text' | 'password';
-  disabled?: boolean;
   startIcon?: IconsType;
   endIcon?: IconsType;
-}
+};

@@ -6,15 +6,10 @@ import * as Styled from './FormField.styled';
 import { COMPONENT_ICONS } from '../../../../constants';
 
 export const FormField: FC<IFormFieldProps> = ({
-  label,
-  name,
-  placeholder,
-  variant = 'outlined',
-  disabled = false,
-  required = false,
-  type = 'text',
   startIcon,
   endIcon,
+  name,
+  ...props
 }) => {
   const [{ value }, { touched, error }, { setValue, setTouched }] =
     useField<string>(name);
@@ -27,16 +22,11 @@ export const FormField: FC<IFormFieldProps> = ({
   return (
     <Styled.Input
       value={value}
-      variant={variant}
-      name={name}
-      placeholder={placeholder}
-      label={label}
+      helperText={touched && error}
       onChange={onChange}
       error={touched && !!error}
-      disabled={disabled}
-      type={type}
-      required={required}
-      helperText={touched && error}
+      name={name}
+      {...props}
       InputProps={{
         startAdornment: startIcon && (
           <InputAdornment position="start">
