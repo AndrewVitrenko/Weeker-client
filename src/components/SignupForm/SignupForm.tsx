@@ -9,9 +9,9 @@ import { ISignupForm } from './SignupForm.types';
 import * as Styled from './SignupForm.styled';
 import { initialValues } from './constants';
 import { validationSchema } from './utils';
-import { useRegisterMutation } from '../../services';
-import { showToast } from '../../store/reducers';
-import { ROUTES } from '../../constants';
+import { useRegisterMutation } from 'src/services';
+import { showToast } from 'src/store/reducers';
+import { ROUTES } from 'src/constants';
 import { extractRequestError } from 'src/helpers';
 
 export const SignupForm: FC = () => {
@@ -20,16 +20,16 @@ export const SignupForm: FC = () => {
   const navigate = useNavigate();
 
   const onSubmit = useCallback(
-    async ({ email, name, password, surname, phone }: ISignupForm) => {
+    async ({ email, firstName, password, lastName, phone }: ISignupForm) => {
       try {
         await signup({
           email,
-          name,
-          surname,
+          firstName,
+          lastName,
           password,
-          phone,
+          phone: phone || null,
         }).unwrap();
-        navigate(ROUTES.HOME, { replace: true });
+        navigate(ROUTES.LOGIN, { replace: true });
       } catch (e) {
         const toastData = extractRequestError(e);
         dispatch(showToast(toastData));
@@ -49,11 +49,10 @@ export const SignupForm: FC = () => {
       {({ handleSubmit }) => (
         <FormContainer onSubmit={handleSubmit}>
           <Styled.InputWrapper>
-            <FormField required name="name" label="Name" />
-            <FormField required name="surname" label="Surname" />
+            <FormField required name="firstName" label="First name" />
+            <FormField required name="lastName" label="Last name" />
           </Styled.InputWrapper>
           <FormField required name="email" type="email" label="Email" />
-          <FormField name="phone" label="Phone" />
           <FormField
             required
             name="password"
@@ -66,6 +65,7 @@ export const SignupForm: FC = () => {
             type="password"
             label="Confirm Password"
           />
+          <FormField name="phone" label="Phone" />
 
           <FormButtons>
             <DefaultButton
